@@ -1,0 +1,5 @@
+boto3
+joblib
+numpy
+scikit-learn 
+pandas # exists in aws lambda layer
