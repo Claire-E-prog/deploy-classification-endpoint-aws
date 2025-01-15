@@ -3,7 +3,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
 from sklearn.datasets import load_iris
 import joblib
-import boto3
+
 
 data = load_iris()
 

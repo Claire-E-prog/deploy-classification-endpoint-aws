@@ -2,7 +2,7 @@ import joblib
 import numpy as np
 import pandas as pd
 from sklearn.datasets import make_classification
-import argparse # for command line arguments
+# import argparse # for command line arguments
 
 def load_model(model_path):
     model = joblib.load(model_path)
@@ -20,14 +20,16 @@ def make_data(n_samples, n_features, n_classes):
 
 def make_csv():
     data = pd.DataFrame(make_data(100, 4, 2))
-    path = 'iris-data.csv'
-    pd.to_csv(data, path)
+    path = '/tmp/iris-data.csv'
+    data.to_csv(path, index=False)
     return path
+    
 
 def main():
     
-    model = load_model(model.pkl)
-    input_data = pd.read_csv(make_csv())
+    model = load_model("model.pkl")
+    data_path = make_csv()
+    input_data = pd.read_csv(data_path).values
     predictions = make_prediction(model, input_data)
     print(f"Predictions: {predictions}")
 
