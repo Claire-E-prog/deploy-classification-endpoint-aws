@@ -2,7 +2,7 @@ import joblib
 import numpy as np
 import pandas as pd
 from sklearn.datasets import make_classification
-# import argparse # for command line arguments
+
 
 def load_model(model_path):
     model = joblib.load(model_path)
