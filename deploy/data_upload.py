@@ -11,11 +11,11 @@ def generate_data(n_samples, n_features, n_classes):
 data = pd.DataFrame(generate_data(100, 4, 2))
 
 # Send the data to S3
-bucket = 'lambda-bucket-iris'
-key = 'data/iris-data.csv'
-data.to_csv('/tmp/iris-data.csv', index=False)
+bucket = 'data-in-all'
+key = 'iris/data.csv'
+data.to_csv('/tmp/data.csv', index=False)
 # initialize s3 client
 s3 = boto3.client('s3')
 # upload file to s3
-s3.upload_file('/tmp/iris-data.csv', bucket, key)
+s3.upload_file('/tmp/data.csv', bucket, key)
 print(f'Uploaded {key} to s3://{bucket}/{key}')

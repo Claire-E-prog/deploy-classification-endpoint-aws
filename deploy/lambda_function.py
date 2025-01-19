@@ -1,18 +1,21 @@
 import boto3
 import pandas as pd
-import os
-import logging
 import joblib
+# Native python
+import os
+import io
+import logging
+
 
 
 # Load the model from the local file system
-def load_model(model_path):
-    model = joblib.load(model_path)
-    return model
+def load_model(bucket_name,model_key):
+    model_path = '/tmp/model.pkl'
+    s3.download_file(bucket_name, model_key, model_path)
+    return joblib.load(model_path)
 
 # Make predictions using the loaded model
 def make_prediction(model, input_data):
-    input_data = np.array(input_data)
     predictions = model.predict(input_data)
     return predictions
 """
@@ -29,7 +32,7 @@ logger.setLevel(logging.INFO)
 # Initialize the S3 client
 s3 = boto3.client('s3')
 
-def lambda_handler(event, context):
+def handler(event, context):
     try:
         # log incoming event 
         logger.info(f'Recieved event: {event}')
@@ -60,8 +63,13 @@ def lambda_handler(event, context):
         logger.info('Input csv loaded successfully')
 
         # Inference
+        logger.info('Running predictions...')
+        predictions = make_prediction(model, df)
+
+        # predictions to csv:
+        predictions_df = pd.DataFrame(predictions, columns=['Predictions'])
         output_csv = io.StringIO()
-        df.to_csv(output_csv, index=False)
+        predictions_df.to_csv(output_csv, index=False)
         """
         ensures that the pointer for the in-memory file is reset to the 
         start so that the entire CSV data can be read and uploaded to S3. 

@@ -8,8 +8,9 @@ def upload_model_to_s3(file_path, bucket_name, s3_path):
     print(f"Uploaded {file_path} to s3://{bucket_name}/{s3_path}")
 
 
-file_path = 'model.pkl'
-bucket_name = 'iris-predictions'
-s3_path = 'model.pkl'
+file_path = '/Users/clairevans/Documents/ML_Ops/iris/develop/model.pkl'
+bucket_name = 'saved-models-all'
+s3_path = 'iris/model.pkl'
 
 upload_model_to_s3(file_path, bucket_name, s3_path)
+
