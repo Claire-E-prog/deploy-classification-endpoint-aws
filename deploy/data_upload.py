@@ -19,3 +19,5 @@ s3 = boto3.client('s3')
 # upload file to s3
 s3.upload_file('/tmp/data.csv', bucket, key)
 print(f'Uploaded {key} to s3://{bucket}/{key}')
+
+# s3://data-in-all/iris/data.csv

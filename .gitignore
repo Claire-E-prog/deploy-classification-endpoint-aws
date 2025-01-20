@@ -24,6 +24,5 @@ venv/
 # deployment packages
 *package/
 
-# files to ignore
-*.ignore
+test-using-os-environ.py
 
